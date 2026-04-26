@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ayu Asriani Tanjung – Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --navy: #0d1b2a;
+    --teal: #1d9e75;
+    --teal-light: #e1f5ee;
+    --cream: #faf8f3;
+    --gold: #c9972b;
+    --text: #1a1a1a;
+    --muted: #5a5a5a;
+    --border: rgba(0,0,0,0.08);
+    --card-bg: #ffffff;
+  }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'DM Sans', sans-serif; background: var(--cream); color: var(--text); line-height: 1.6; }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    background: rgba(250,248,243,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    padding: 0 2rem;
+    display: flex; align-items: center; justify-content: space-between;
+    height: 60px;
+  }
+  .nav-logo { font-family: 'Playfair Display', serif; font-size: 1.1rem; color: var(--navy); }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a { font-size: 0.85rem; color: var(--muted); text-decoration: none; letter-spacing: 0.05em; text-transform: uppercase; transition: color 0.2s; }
+  .nav-links a:hover { color: var(--teal); }
+  .nav-toggle { display: none; font-size: 1.4rem; cursor: pointer; background: none; border: none; color: var(--navy); }
+
+  /* ── HERO ── */
+  .hero { min-height: 100vh; display: grid; grid-template-columns: 1fr 1fr; padding-top: 60px; }
+  .hero-left {
+    background: var(--navy);
+    padding: 5rem 4rem;
+    display: flex; flex-direction: column; justify-content: center;
+    position: relative; overflow: hidden;
+  }
+  .hero-left::before {
+    content: ''; position: absolute; top: -80px; right: -80px;
+    width: 300px; height: 300px; border-radius: 50%;
+    border: 60px solid rgba(29,158,117,0.12);
+  }
+  .hero-left::after {
+    content: ''; position: absolute; bottom: -40px; left: -40px;
+    width: 180px; height: 180px; border-radius: 50%;
+    border: 40px solid rgba(201,151,43,0.1);
+  }
+  .hero-tag { font-size: 0.75rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--teal); margin-bottom: 1.5rem; display: flex; align-items: center; gap: 0.75rem; }
+  .hero-tag::before { content: ''; display: block; width: 32px; height: 1px; background: var(--teal); }
+  .hero-name { font-family: 'Playfair Display', serif; font-size: clamp(2.2rem, 4vw, 3.5rem); color: #fff; line-height: 1.15; margin-bottom: 1rem; }
+  .hero-name span { color: var(--gold); font-style: italic; }
+  .hero-title { font-size: 0.95rem; color: rgba(255,255,255,0.55); margin-bottom: 2rem; font-weight: 300; letter-spacing: 0.05em; }
+  .hero-desc { font-size: 0.9rem; color: rgba(255,255,255,0.7); line-height: 1.8; max-width: 400px; margin-bottom: 2.5rem; border-left: 2px solid var(--teal); padding-left: 1rem; }
+  .hero-cta { display: inline-flex; align-items: center; gap: 0.75rem; background: var(--teal); color: #fff; padding: 0.75rem 1.75rem; border-radius: 2px; text-decoration: none; font-size: 0.85rem; font-weight: 500; letter-spacing: 0.05em; text-transform: uppercase; transition: background 0.2s; }
+  .hero-cta:hover { background: #16805f; }
+  .hero-right { background: var(--cream); padding: 5rem 3rem; display: flex; flex-direction: column; justify-content: center; }
+  .stat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-bottom: 3rem; }
+  .stat-card { background: var(--card-bg); border: 1px solid var(--border); border-radius: 4px; padding: 1.5rem; }
+  .stat-num { font-family: 'Playfair Display', serif; font-size: 2.5rem; color: var(--navy); line-height: 1; }
+  .stat-label { font-size: 0.78rem; color: var(--muted); margin-top: 0.4rem; text-transform: uppercase; letter-spacing: 0.08em; }
+  .contact-list { display: flex; flex-direction: column; gap: 0.75rem; }
+  .contact-item { display: flex; align-items: center; gap: 0.75rem; font-size: 0.88rem; color: var(--muted); }
+  .contact-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--teal); flex-shrink: 0; }
+  .contact-item a { color: var(--teal); text-decoration: none; }
+
+  /* ── SECTION BASE ── */
+  section { padding: 5rem 0; }
+  .container { max-width: 1100px; margin: 0 auto; padding: 0 2rem; }
+  .section-header { margin-bottom: 3rem; }
+  .section-label { font-size: 0.72rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--teal); display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.75rem; }
+  .section-label::before { content: ''; display: block; width: 24px; height: 1px; background: var(--teal); }
+  .section-title { font-family: 'Playfair Display', serif; font-size: 2.2rem; color: var(--navy); }
+
+  /* ── SKILLS ── */
+  #skills { background: var(--navy); }
+  #skills .section-title { color: #fff; }
+  #skills .section-label { color: var(--gold); }
+  #skills .section-label::before { background: var(--gold); }
+  .skill-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 1.25rem; }
+  .skill-card { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.08); border-radius: 4px; padding: 1.25rem 1.5rem; display: flex; align-items: flex-start; gap: 1rem; transition: background 0.2s, border-color 0.2s; }
+  .skill-card:hover { background: rgba(29,158,117,0.12); border-color: rgba(29,158,117,0.3); }
+  .skill-icon { font-size: 1.2rem; margin-top: 2px; }
+  .skill-name { font-size: 0.9rem; color: rgba(255,255,255,0.85); font-weight: 400; }
+  .skill-sub { font-size: 0.75rem; color: rgba(255,255,255,0.4); margin-top: 0.2rem; }
+
+  /* ── EXPERIENCE ── */
+  #experience { background: var(--cream); }
+  .exp-timeline { position: relative; padding-left: 0; }
+  .exp-timeline::before { content: ''; position: absolute; left: 0; top: 8px; bottom: 0; width: 1px; background: var(--border); }
+  .exp-item { display: grid; grid-template-columns: 200px 1fr; gap: 2.5rem; margin-bottom: 3rem; position: relative; }
+  .exp-item::before { content: ''; position: absolute; left: -4px; top: 8px; width: 8px; height: 8px; border-radius: 50%; background: var(--teal); }
+  .exp-meta { padding-left: 1.5rem; }
+  .exp-period { font-size: 0.78rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 0.5rem; }
+  .exp-company { font-family: 'Playfair Display', serif; font-size: 1rem; color: var(--navy); }
+  .exp-project { font-size: 0.8rem; color: var(--teal); margin-top: 0.25rem; }
+  .exp-content { background: var(--card-bg); border: 1px solid var(--border); border-radius: 4px; padding: 1.5rem 2rem; }
+  .exp-role { font-size: 0.78rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--teal); margin-bottom: 0.5rem; }
+  .exp-roletitle { font-size: 1.1rem; font-weight: 500; color: var(--navy); margin-bottom: 1rem; }
+  .exp-tasks { list-style: none; display: flex; flex-direction: column; gap: 0.4rem; }
+  .exp-tasks li { font-size: 0.875rem; color: var(--muted); display: flex; align-items: baseline; gap: 0.6rem; }
+  .exp-tasks li::before { content: '→'; color: var(--teal); font-size: 0.75rem; flex-shrink: 0; }
+
+  /* ── WEBSITES ── */
+  #websites { background: #f5f2eb; }
+  .web-list { display: flex; flex-direction: column; gap: 1.25rem; }
+  .web-row { background: #fff; border: 1px solid var(--border); border-radius: 10px; display: grid; grid-template-columns: 56px 1fr auto; align-items: center; gap: 1.25rem; padding: 1.25rem 1.5rem; transition: box-shadow 0.2s, transform 0.2s; }
+  .web-row:hover { box-shadow: 0 8px 28px rgba(0,0,0,0.07); transform: translateY(-2px); }
+  .web-num { width: 56px; height: 56px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: 'Playfair Display', serif; font-size: 1.4rem; font-weight: 700; flex-shrink: 0; }
+  .web-num.c1 { background: #e8ecf0; color: var(--navy); }
+  .web-num.c2 { background: var(--teal-light); color: #0f6e56; }
+  .web-num.c3 { background: #fdf3df; color: #854f0b; }
+  .web-info { min-width: 0; }
+  .web-tag { font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--teal); margin-bottom: 0.25rem; }
+  .web-title { font-size: 1rem; font-weight: 500; color: var(--navy); margin-bottom: 0.3rem; }
+  .web-desc { font-size: 0.82rem; color: var(--muted); line-height: 1.5; margin-bottom: 0.6rem; }
+  .pill-row { display: flex; flex-wrap: wrap; gap: 0.35rem; }
+  .pill { font-size: 0.67rem; padding: 2px 10px; border-radius: 20px; letter-spacing: 0.04em; }
+  .pill.teal { background: var(--teal-light); color: #0f6e56; }
+  .pill.gold { background: #fdf3df; color: #854f0b; }
+  .pill.navy { background: #e8ecf0; color: var(--navy); }
+  .visit-btn { display: inline-flex; align-items: center; gap: 0.4rem; background: var(--navy); color: #fff; padding: 0.5rem 1.1rem; border-radius: 6px; text-decoration: none; font-size: 0.78rem; font-weight: 500; white-space: nowrap; transition: background 0.2s; }
+  .visit-btn:hover { background: var(--teal); }
+
+  /* ── POSTER / SOSMED ── */
+  #poster { background: var(--cream); }
+  .filter-row { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 2rem; }
+  .filter-btn { padding: 0.4rem 1rem; border-radius: 20px; border: 1px solid var(--border); background: #fff; font-size: 0.78rem; cursor: pointer; color: var(--muted); font-family: 'DM Sans', sans-serif; transition: all 0.2s; }
+  .filter-btn.active, .filter-btn:hover { background: var(--navy); color: #fff; border-color: var(--navy); }
+  .poster-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 1.25rem; }
+  .poster-card { background: #fff; border: 1px solid var(--border); border-radius: 10px; overflow: hidden; transition: transform 0.2s, box-shadow 0.2s; }
+  .poster-card:hover { transform: translateY(-4px); box-shadow: 0 12px 32px rgba(0,0,0,0.09); }
+  .poster-card.hidden { display: none; }
+  /* ============================================================
+     CARA MENAMBAH GAMBAR POSTER:
+     Ganti src="" di dalam .poster-img dengan path gambar kamu.
+     Contoh: src="images/poster1.jpg"
+     Letakkan folder images/ di direktori yang sama dengan file HTML ini.
+  ============================================================ */
+  .poster-img { width: 100%; aspect-ratio: 1/1; object-fit: cover; display: block; background: #eee; }
+  .poster-placeholder { width: 100%; aspect-ratio: 1/1; display: flex; flex-direction: column; align-items: center; justify-content: center; background: linear-gradient(135deg, #e8ecf0, #d3d1c7); color: var(--muted); font-size: 0.8rem; gap: 0.5rem; }
+  .poster-placeholder span { font-size: 2rem; }
+  .poster-body { padding: 1rem 1.25rem; }
+  .poster-cat { font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--teal); margin-bottom: 0.3rem; }
+  .poster-title { font-size: 0.92rem; font-weight: 500; color: var(--navy); margin-bottom: 0.25rem; }
+  .poster-desc { font-size: 0.78rem; color: var(--muted); line-height: 1.5; }
+
+  /* ── EDUCATION ── */
+  #education { background: #f5f2eb; }
+  .edu-card { background: var(--card-bg); border: 1px solid var(--border); border-radius: 4px; padding: 2rem; display: flex; gap: 2rem; align-items: flex-start; max-width: 700px; }
+  .edu-icon { width: 56px; height: 56px; border-radius: 50%; background: var(--teal-light); display: flex; align-items: center; justify-content: center; font-size: 1.4rem; flex-shrink: 0; }
+  .edu-school { font-family: 'Playfair Display', serif; font-size: 1.1rem; color: var(--navy); margin-bottom: 0.25rem; }
+  .edu-degree { font-size: 0.9rem; color: var(--muted); margin-bottom: 0.25rem; }
+  .edu-period { font-size: 0.8rem; color: var(--muted); }
+
+  /* ── FOOTER ── */
+  footer { background: var(--navy); padding: 3rem 2rem; text-align: center; }
+  .footer-name { font-family: 'Playfair Display', serif; font-size: 1.5rem; color: #fff; margin-bottom: 0.5rem; }
+  .footer-sub { font-size: 0.82rem; color: rgba(255,255,255,0.4); margin-bottom: 1.5rem; }
+  .footer-links { display: flex; justify-content: center; gap: 2rem; flex-wrap: wrap; }
+  .footer-links a { font-size: 0.8rem; color: var(--teal); text-decoration: none; }
+  .footer-copy { font-size: 0.72rem; color: rgba(255,255,255,0.25); margin-top: 1.5rem; }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 768px) {
+    .hero { grid-template-columns: 1fr; }
+    .hero-left { padding: 3rem 1.5rem; }
+    .hero-right { padding: 2.5rem 1.5rem; }
+    .nav-links { display: none; flex-direction: column; position: absolute; top: 60px; left: 0; right: 0; background: var(--cream); border-bottom: 1px solid var(--border); padding: 1rem 2rem; gap: 1rem; }
+    .nav-links.open { display: flex; }
+    .nav-toggle { display: block; }
+    .exp-item { grid-template-columns: 1fr; }
+    .exp-meta { padding-left: 1.5rem; }
+    .web-row { grid-template-columns: 48px 1fr; }
+    .web-row .visit-btn { display: none; }
+    .web-title a { color: var(--teal); }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">Ayu Asriani Tanjung</div>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#websites">Websites</a></li>
+    <li><a href="#poster">Poster</a></li>
+    <li><a href="#education">Education</a></li>
+  </ul>
+  <button class="nav-toggle" onclick="toggleNav()">☰</button>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-left">
+    <div class="hero-tag">Portfolio</div>
+    <h1 class="hero-name">Ayu <span>Asriani</span><br>Tanjung</h1>
+    <p class="hero-title">Software Quality Assurance · Web Developer · Content Creator</p>
+    <p class="hero-desc">
+      Motivated SQA professional dengan 4+ tahun pengalaman memastikan kualitas produk software tertinggi.
+      Skilled dalam functional testing, automation, bug lifecycle, web development, dan desain konten sosial media.
+    </p>
+    <a href="mailto:ayuasriani100@gmail.com" class="hero-cta">Hubungi Saya →</a>
+  </div>
+  <div class="hero-right">
+    <div class="stat-grid">
+      <div class="stat-card"><div class="stat-num">4+</div><div class="stat-label">Tahun Pengalaman</div></div>
+      <div class="stat-card"><div class="stat-num">4</div><div class="stat-label">Perusahaan</div></div>
+      <div class="stat-card"><div class="stat-num">15+</div><div class="stat-label">Tools & Teknologi</div></div>
+      <div class="stat-card"><div class="stat-num">3</div><div class="stat-label">Bidang Keahlian</div></div>
+    </div>
+    <div class="contact-list">
+      <div class="contact-item"><div class="contact-dot"></div>082274397953</div>
+      <div class="contact-item"><div class="contact-dot"></div><a href="mailto:ayuasriani100@gmail.com">ayuasriani100@gmail.com</a></div>
+      <div class="contact-item"><div class="contact-dot"></div>Kebon Jeruk, Jakarta Barat</div>
+      <div class="contact-item"><div class="contact-dot"></div><a href="https://www.linkedin.com/in/ayu-tanjung-6b4a1516b" target="_blank">LinkedIn Profile</a></div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-label">Core Competencies</div>
+      <h2 class="section-title" style="color:#fff">Skill &amp; Keahlian</h2>
+    </div>
+    <div class="skill-grid">
+      <div class="skill-card"><div class="skill-icon">🧪</div><div><div class="skill-name">Quality Testing</div><div class="skill-sub">UAT, Regression, Smoke, SIT</div></div></div>
+      <div class="skill-card"><div class="skill-icon">🐛</div><div><div class="skill-name">Bug Management</div><div class="skill-sub">JIRA, Phabricator</div></div></div>
+      <div class="skill-card"><div class="skill-icon">🤖</div><div><div class="skill-name">Test Automation</div><div class="skill-sub">Robot Framework, Katalon, Selenium</div></div></div>
+      <div class="skill-card"><div class="skill-icon">📮</div><div><div class="skill-name">API Testing</div><div class="skill-sub">Postman, endpoint validation</div></div></div>
+      <div class="skill-card"><div class="skill-icon">📋</div><div><div class="skill-name">Test Case Management</div><div class="skill-sub">TestRail, AIO Tests</div></div></div>
+      <div class="skill-card"><div class="skill-icon">🗄️</div><div><div class="skill-name">Database</div><div class="skill-sub">MySQL, Metabase</div></div></div>
+      <div class="skill-card"><div class="skill-icon">🔄</div><div><div class="skill-name">SDLC &amp; Agile</div><div class="skill-sub">Waterfall &amp; Scrum</div></div></div>
+      <div class="skill-card"><div class="skill-icon">🌐</div><div><div class="skill-name">Web Development</div><div class="skill-sub">HTML, CSS, JavaScript, Python/Django</div></div></div>
+      <div class="skill-card"><div class="skill-icon">🎨</div><div><div class="skill-name">Desain Poster</div><div class="skill-sub">Konten Visual Sosial Media</div></div></div>
+      <div class="skill-card"><div class="skill-icon">📊</div><div><div class="skill-name">Office Tools</div><div class="skill-sub">Word, Excel, PowerPoint</div></div></div>
+      <div class="skill-card"><div class="skill-icon">🗂️</div><div><div class="skill-name">Design System</div><div class="skill-sub">yEd diagram tool</div></div></div>
+      <div class="skill-card"><div class="skill-icon">💡</div><div><div class="skill-name">Analytical Thinking</div><div class="skill-sub">Root cause analysis</div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-label">Career Journey</div>
+      <h2 class="section-title">Pengalaman Kerja</h2>
+    </div>
+    <div class="exp-timeline">
+
+      <div class="exp-item">
+        <div class="exp-meta">
+          <div class="exp-period">Agu 2022 – Sekarang</div>
+          <div class="exp-company">Lion Parcel</div>
+          <div class="exp-project">Web Genesis</div>
+        </div>
+        <div class="exp-content">
+          <div class="exp-role">Current Role</div>
+          <div class="exp-roletitle">Software Quality Assurance</div>
+          <ul class="exp-tasks">
+            <li>Develop test cases menggunakan TestRail.io</li>
+            <li>Functional testing, validasi API endpoint &amp; database</li>
+            <li>Buat automated tests menggunakan Robot Framework</li>
+            <li>Regression, Smoke &amp; SIT testing</li>
+            <li>Kolaborasi dengan developer &amp; stakeholder</li>
+            <li>Kelola test data untuk berbagai skenario pengujian</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="exp-item">
+        <div class="exp-meta">
+          <div class="exp-period">Okt 2021 – Jul 2022</div>
+          <div class="exp-company">SiCepat Ekspres</div>
+          <div class="exp-project">Project Billing</div>
+        </div>
+        <div class="exp-content">
+          <div class="exp-role">Previous Role</div>
+          <div class="exp-roletitle">Quality Assurance Analyst</div>
+          <ul class="exp-tasks">
+            <li>Buat test case menggunakan AIO Tests</li>
+            <li>Verifikasi requirement &amp; spesifikasi teknis</li>
+            <li>Functional testing &amp; validasi data via Postman</li>
+            <li>Analisa defect &amp; identifikasi root cause</li>
+            <li>Partisipasi dalam agile team</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="exp-item">
+        <div class="exp-meta">
+          <div class="exp-period">Des 2020 – Agu 2021</div>
+          <div class="exp-company">Cermati</div>
+          <div class="exp-project">Blu by BCA Digital</div>
+        </div>
+        <div class="exp-content">
+          <div class="exp-role">Previous Role</div>
+          <div class="exp-roletitle">Software Quality Assurance</div>
+          <ul class="exp-tasks">
+            <li>Buat dan eksekusi test case</li>
+            <li>Functional testing (UAT, Regression, Sanity) – iOS</li>
+            <li>Reproduce &amp; log bug report</li>
+            <li>Follow-up issues dengan developer &amp; PM</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="exp-item">
+        <div class="exp-meta">
+          <div class="exp-period">Nov 2019 – Nov 2020</div>
+          <div class="exp-company">PT Bank Mandiri</div>
+          <div class="exp-project">Kontrak</div>
+        </div>
+        <div class="exp-content">
+          <div class="exp-role">Previous Role</div>
+          <div class="exp-roletitle">Tester Quality Assurance</div>
+          <ul class="exp-tasks">
+            <li>Responsible for SIT, UAT &amp; Regression testing</li>
+            <li>Buat test case &amp; bug tracking via JIRA</li>
+            <li>Buat laporan testing &amp; dokumentasi error</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- WEBSITES -->
+<section id="websites">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-label">Live Projects</div>
+      <h2 class="section-title">Website yang Dibuat</h2>
+    </div>
+    <div class="web-list">
+
+      <div class="web-row">
+        <div class="web-num c1">01</div>
+        <div class="web-info">
+          <div class="web-tag">Web App · Pemerintahan</div>
+          <div class="web-title">TARA – Taksiran Biaya Perkara</div>
+          <div class="web-desc">Sistem kalkulasi estimasi biaya panjar perkara untuk Mahkamah Syar'iyah Blangkejeren. Mendukung berbagai jenis perkara seperti cerai gugat, isbat nikah, dispensasi kawin, dan lainnya.</div>
+          <div class="pill-row">
+            <span class="pill teal">Python / Django</span>
+            <span class="pill teal">Web App</span>
+            <span class="pill navy">Mahkamah Syar'iyah</span>
+            <span class="pill navy">Blangkejeren</span>
+          </div>
+        </div>
+        <a class="visit-btn" href="https://tara.ms-blangkejeren.go.id/" target="_blank">Kunjungi ↗</a>
+      </div>
+
+      <div class="web-row">
+        <div class="web-num c2">02</div>
+        <div class="web-info">
+          <div class="web-tag">Web App · Pemerintahan</div>
+          <div class="web-title">SIASRI – Sistem Informasi Administrasi Surat Terintegrasi</div>
+          <div class="web-desc">Aplikasi manajemen administrasi surat terintegrasi untuk Mahkamah Syar'iyah Blangkejeren di bawah Direktorat Jenderal Badan Peradilan Agama, Mahkamah Agung RI.</div>
+          <div class="pill-row">
+            <span class="pill teal">Python / Django</span>
+            <span class="pill teal">Web App</span>
+            <span class="pill navy">Mahkamah Agung RI</span>
+            <span class="pill navy">Blangkejeren</span>
+          </div>
+        </div>
+        <a class="visit-btn" href="https://siasri.ms-blangkejeren.go.id/" target="_blank">Kunjungi ↗</a>
+      </div>
+
+      <div class="web-row">
+        <div class="web-num c3">03</div>
+        <div class="web-info">
+          <div class="web-tag">Web App · Personal Finance</div>
+          <div class="web-title">Dompetku – Aplikasi Catat Keuangan</div>
+          <div class="web-desc">Aplikasi pencatatan dan pemantauan keuangan pribadi dengan fitur login Google, manajemen transaksi, dan laporan pengeluaran. Dibangun dengan Django dan di-host di PythonAnywhere.</div>
+          <div class="pill-row">
+            <span class="pill gold">Python / Django</span>
+            <span class="pill gold">PythonAnywhere</span>
+            <span class="pill navy">Google OAuth</span>
+            <span class="pill navy">Personal Project</span>
+          </div>
+        </div>
+        <a class="visit-btn" href="https://ayutanjung98.pythonanywhere.com/" target="_blank">Kunjungi ↗</a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- POSTER / SOSMED -->
+<!--
+  ============================================================
+  CARA MENAMBAH POSTER / GAMBAR SOSMED:
+  1. Buat folder bernama "images" di direktori yang sama dengan file ini
+  2. Masukkan semua gambar poster ke folder tersebut
+  3. Duplikat salah satu blok <div class="poster-card"> di bawah
+  4. Ubah:
+     - data-cat="..." → kategori: instagram / poster / template
+     - <img src="images/NAMA_FILE.jpg"> → ganti dengan nama file gambar kamu
+     - .poster-cat → nama kategori yang tampil
+     - .poster-title → judul poster
+     - .poster-desc → deskripsi singkat
+  ============================================================
+-->
+<section id="poster">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-label">Creative Work</div>
+      <h2 class="section-title">Poster &amp; Sosial Media</h2>
+    </div>
+
+    <div class="filter-row">
+      <button class="filter-btn active" onclick="filterPoster('all', this)">Semua</button>
+      <button class="filter-btn" onclick="filterPoster('instagram', this)">Instagram</button>
+      <button class="filter-btn" onclick="filterPoster('poster', this)">Poster Event</button>
+      <button class="filter-btn" onclick="filterPoster('template', this)">Template</button>
+    </div>
+
+    <div class="poster-grid" id="posterGrid">
+
+      <!-- CONTOH KARTU DENGAN GAMBAR — ganti src dengan path gambarmu -->
+      <!--
+      <div class="poster-card" data-cat="instagram">
+        <img class="poster-img" src="images/poster1.jpg" alt="Poster 1">
+        <div class="poster-body">
+          <div class="poster-cat">Instagram</div>
+          <div class="poster-title">Judul Poster</div>
+          <div class="poster-desc">Deskripsi singkat poster ini.</div>
+        </div>
+      </div>
+      -->
+
+      <!-- PLACEHOLDER — hapus ini setelah tambah gambar asli -->
+      <div class="poster-card" data-cat="instagram">
+        <div class="poster-placeholder"><span>🖼️</span>Tambahkan gambar poster di sini</div>
+        <div class="poster-body">
+          <div class="poster-cat">Instagram</div>
+          <div class="poster-title">Konten Feed Instagram</div>
+          <div class="poster-desc">Ganti placeholder ini dengan gambar postermu.</div>
+        </div>
+      </div>
+
+      <div class="poster-card" data-cat="poster">
+        <div class="poster-placeholder"><span>📣</span>Tambahkan gambar poster di sini</div>
+        <div class="poster-body">
+          <div class="poster-cat">Poster Event</div>
+          <div class="poster-title">Poster Promosi Event</div>
+          <div class="poster-desc">Ganti placeholder ini dengan gambar postermu.</div>
+        </div>
+      </div>
+
+      <div class="poster-card" data-cat="template">
+        <div class="poster-placeholder"><span>🎨</span>Tambahkan gambar poster di sini</div>
+        <div class="poster-body">
+          <div class="poster-cat">Template</div>
+          <div class="poster-title">Template Feed Sosmed</div>
+          <div class="poster-desc">Ganti placeholder ini dengan gambar postermu.</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- EDUCATION -->
+<section id="education">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-label">Academic Background</div>
+      <h2 class="section-title">Pendidikan</h2>
+    </div>
+    <div class="edu-card">
+      <div class="edu-icon">🎓</div>
+      <div>
+        <div class="edu-school">Institut Teknologi Del</div>
+        <div class="edu-degree">D3 Teknik Komputer (Computer Engineering)</div>
+        <div class="edu-period">2016 – 2019</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-name">Ayu Asriani Tanjung</div>
+  <div class="footer-sub">Software Quality Assurance · Web Developer · Content Creator</div>
+  <div class="footer-links">
+    <a href="mailto:ayuasriani100@gmail.com">ayuasriani100@gmail.com</a>
+    <a href="tel:082274397953">082274397953</a>
+    <a href="https://www.linkedin.com/in/ayu-tanjung-6b4a1516b" target="_blank">LinkedIn</a>
+  </div>
+  <div class="footer-copy">© 2025 Ayu Asriani Tanjung. All rights reserved.</div>
+</footer>
+
+<script>
+  function toggleNav() {
+    document.getElementById('navLinks').classList.toggle('open');
+  }
+
+  function filterPoster(cat, btn) {
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    document.querySelectorAll('.poster-card').forEach(card => {
+      if (cat === 'all' || card.dataset.cat === cat) {
+        card.classList.remove('hidden');
+      } else {
+        card.classList.add('hidden');
+      }
+    });
+  }
+</script>
+</body>
+</html>
